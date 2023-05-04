@@ -1,6 +1,6 @@
 # Project: bills-manager
 #### OVERVIEW: 
-    Bill Manager is a application design to keep a track of one's bills in a simple way.
+    Bills-Manager is a application design to keep a track of one's bills in a simple way.
 
 #### USED TECHNOLOGIES:
     Java(17), Spring Boot(3.0.6), Spring Validation, Spring Data JPA, MySQL, Spring MVC, Thymeleaf, Bootstrap, AJAX, JQuery, Maven
