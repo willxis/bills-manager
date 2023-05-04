@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{DefaultLayout :: standartStructure(~{::title}, ~{::section})}">
+	
+	<head>
+		<title >My Bills</title>
+	</head>
+    <section>
+    	<div th:insert="~{_Alerts :: successAlert}"></div>
+	    <div class="panel panel-default">
+	   		<div class="panel-heading">
+	   			<h1 class="panel-title">My Bills</h1>
+	   			<a class="btn btn-link" th:href="@{/bills/register}">Register bill</a>
+	   		</div>
+ 		
+	   		<div class="panel-body">
+			   	<form method="GET" class="form-horizontal" th:object="${filter}">
+		    		<div class="form-group">
+		    			<div class="col-sm-4">
+		    				<div class="input-group">
+		    					<input class="form-control" placeholder="Find a bill by description" 
+		    					autofocus="autofocus" name="description" th:field="*{description}"></input>
+		    					<span class="input-group-btn">
+		    						<button type="submit" class="btn btn-default">
+		    							<i class="glyphicon glyphicon-search"></i>
+		    						</button>
+		    					</span>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</form>
+		    	
+		    	<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th class="text-center col-md-1">#</th>
+								<th>Description</th>
+								<th class="text-center col-md-2">Due Date</th>
+								<th class="text-right col-md-2">Amount</th>
+								<th class="text-center col-md-2">Status</th>
+								<th class="col-md-1"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bill : ${allBills}">
+								<td class="text-center" th:text="${bill.code}"></td>
+								<td th:text="${bill.description}"></td>
+								<td class="text-center" th:text="${{bill.dueDate}}"></td>
+								<td class="text-right" th:text="|$ ${{bill.amount}}|"></td>
+								<td class="text-center" th:attr="data-role=${bill.code}">
+									<span class="label" th:text="${bill.status.description}"
+									th:classappend="${bill.isReceived ? 'label-success' : 'label-danger'}"></span>
+								</td>
+								<td class="text-center">
+									<a class="btn btn-link btn-xs" th:href="@{/bills/{code}(code=${bill.code})}"
+										title="Edit" rel="tolltip" data-placement="top">
+										<span class="glyphicon glyphicon-pencil"></span>
+									</a>
+									<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#deleteConfirmationModal"
+										th:attr="data-billcode=${bill.code}, data-billdescription=${bill.description}"
+										title="Delete" rel="tolltip" data-placement="top">
+										<span class="glyphicon glyphicon-remove"></span>
+									</a>
+									<a class="btn btn-link btn-xs js-update-status" th:if="${!bill.isReceived}"
+										title="Receive" rel="tolltip" data-placement="top"
+										th:attr="data-code=${bill.code}"
+										th:href='@{/bills/{code}/receive(code=${bill.code})}'>
+										<span class="glyphicon glyphicon-check"></span>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6" th:if="${#lists.isEmpty(allBills)}">No bills found.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div th:insert="~{_DeleteDialog :: deleteModal}"></div>
+	   	</div>
+	</section>
+</html>

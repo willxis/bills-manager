@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{DefaultLayout :: standartStructure(~{::title}, ~{::section})}">
+
+	<head>
+		<title>Bill Register</title>
+	</head>
+    
+	<section>
+		<div th:insert="~{_Alerts :: successAlert}"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h1 class="panel-title">New Bill</h1>
+				<a class="btn btn-link" th:href="@{/bills}">My bills</a>
+			</div>
+		    <form class="form-horizontal" method="POST" th:action="@{/bills}" th:object="${bill}">
+				<div th:insert="~{_Alerts :: errorsAlert}"></div>
+	    		<div class="panel-body">
+	    		<input type="hidden" th:field="*{code}"/>
+					<div class="form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
+						<label for="description" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-4"> 
+							<input type="text" class="form-control" id="description" th:field="*{description}"/>
+						</div>
+					</div>
+					<div class="form-group" th:classappend="${#fields.hasErrors('dueDate')} ? has-error">
+						<label for="dueDate" class="col-sm-2 control-label">Due Date</label>
+						<div class="col-sm-2">  
+							<input type="text" class="form-control"	id="dueDate" th:field="*{dueDate}"
+							data-provide="datepicker" data-date-format="yyyy/mm/dd" data-date-language="en-CA"
+							data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+						</div>
+					</div>
+					<div class="form-group" th:classappend="${#fields.hasErrors('amount')} ? has-error">
+						<label for="amount" class="col-sm-2 control-label">Amount</label>
+						<div class="col-sm-2">   
+							<input type="text" class="form-control js-currency" id="amount" th:field="*{amount}"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="status" class="col-sm-2 control-label">Status</label>
+						<div class="col-sm-2">
+							<select class="form-control" name="status">
+								<option th:each="status: ${allBillStatuses}" th:value="${status}" th:text="${status.description}" th:field="*{status}"></option>
+	                    	</select>
+	                    </div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</div>
+				</div>
+		    </form>
+	    </div>
+	</section>
+</html>
