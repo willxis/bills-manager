@@ -86,8 +86,8 @@ public class Bill {
 		this.status = status;
 	}
 
-	public boolean isReceived() {
-		return BillStatus.RECEIVED.equals(this.status);
+	public boolean isPaid() {
+		return BillStatus.PAID.equals(this.status);
 	}
 
 	@Override

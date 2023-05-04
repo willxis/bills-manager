@@ -30,12 +30,12 @@ public class BillingRegisterService {
 		bills.deleteById(code);
 	}
 
-	public String receive(Long code) {
+	public String pay(Long code) {
 		Optional<Bill> bill = bills.findById(code);	
-		bill.get().setStatus(BillStatus.RECEIVED);
+		bill.get().setStatus(BillStatus.PAID);
 		bills.save(bill.get());
 		
-		return BillStatus.RECEIVED.getDescription();
+		return BillStatus.PAID.getDescription();
 	}
 	
 	public List<Bill> filter(BillFilter filter) {

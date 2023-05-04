@@ -93,8 +93,8 @@ public class BillingController {
 		return Arrays.asList(BillStatus.values());
 	}
 	
-	@PutMapping(value="/{code}/receive")
-	public @ResponseBody String receive(@PathVariable Long code) {
-		return billingRegisterService.receive(code);
+	@PutMapping(value="/{code}/pay")
+	public @ResponseBody String pay(@PathVariable Long code) {
+		return billingRegisterService.pay(code);
 	}
 }

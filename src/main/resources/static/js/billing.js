@@ -23,18 +23,18 @@ $(function() {
 	$('.js-update-status').on('click', function(event) {
 		event.preventDefault();
 		
-		const receiveButton = $(event.currentTarget);
-		const receiveUrl = receiveButton.attr('href');
+		const payButton = $(event.currentTarget);
+		const payUrl = payButton.attr('href');
 		
 		let response = $.ajax({
-			url: receiveUrl,
+			url: payUrl,
 			type: 'PUT'
 		});
 		
 		response.done(function(e) {
-			const billCode = receiveButton.data('code');
+			const billCode = payButton.data('code');
 			$('[data-role=' + billCode + ']').html('<span class="label label-success">' + e + '</span>');
-			receiveButton.hide();
+			payButton.hide();
 		});
 		
 		response.fail(function(e) {

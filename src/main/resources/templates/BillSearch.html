@@ -51,7 +51,7 @@
 								<td class="text-right" th:text="|$ ${{bill.amount}}|"></td>
 								<td class="text-center" th:attr="data-role=${bill.code}">
 									<span class="label" th:text="${bill.status.description}"
-									th:classappend="${bill.isReceived ? 'label-success' : 'label-danger'}"></span>
+									th:classappend="${bill.isPaid ? 'label-success' : 'label-danger'}"></span>
 								</td>
 								<td class="text-center">
 									<a class="btn btn-link btn-xs" th:href="@{/bills/{code}(code=${bill.code})}"
@@ -63,10 +63,10 @@
 										title="Delete" rel="tolltip" data-placement="top">
 										<span class="glyphicon glyphicon-remove"></span>
 									</a>
-									<a class="btn btn-link btn-xs js-update-status" th:if="${!bill.isReceived}"
-										title="Receive" rel="tolltip" data-placement="top"
+									<a class="btn btn-link btn-xs js-update-status" th:if="${!bill.isPaid}"
+										title="Pay" rel="tolltip" data-placement="top"
 										th:attr="data-code=${bill.code}"
-										th:href='@{/bills/{code}/receive(code=${bill.code})}'>
+										th:href='@{/bills/{code}/pay(code=${bill.code})}'>
 										<span class="glyphicon glyphicon-check"></span>
 									</a>
 								</td>

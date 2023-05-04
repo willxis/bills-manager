@@ -3,7 +3,7 @@ package com.itworks.billsmanager.model;
 public enum BillStatus {
 	
 	PENDING("Pending"),
-	RECEIVED("Received");
+	PAID("Paid");
 	
 	private String description;
 	
