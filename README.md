@@ -5,7 +5,7 @@
 #### USED TECHNOLOGIES:
     Java(17), Spring Boot(3.0.6), Spring Validation, Spring Data JPA, MySQL, Spring MVC, Thymeleaf, Bootstrap, AJAX, JQuery, Maven
 
-## iNTERFACES:
+## INTERFACES:
     Bills-manager is an application composed of 2 interfaces:
         => Register Interface: to register a new bill
         => Search Interface: to list/edit the bills already registered.
